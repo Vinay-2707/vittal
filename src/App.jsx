@@ -1,122 +1,239 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [status, setStatus] = useState("Running");
+
+  const restartServer = () => {
+    setStatus("Restarting...");
+
+    setTimeout(() => {
+      setStatus("Running");
+    }, 2000);
+  };
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    <div className="app">
+      {/* Navbar */}
+      <nav className="navbar">
+        <div className="logo">DevOps<span>Hub</span></div>
+
+        <div className="nav-links">
+          <a href="#home">Home</a>
+          <a href="#services">Services</a>
+          <a href="#deployment">Deployment</a>
+          <a href="#about">About</a>
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="hero" id="home">
+        <div className="hero-content">
+          <p className="small-title">MY FIRST DEVOPS PROJECT</p>
+
+          <h1>
+            React App on
+            <span> AWS EC2</span>
+          </h1>
+
+          <p className="hero-text">
+            A simple React application deployed using Docker, Nginx and
+            Amazon EC2.
           </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
 
-      <div className="ticks"></div>
+          <div className="hero-buttons">
+            <a href="#deployment" className="primary-btn">
+              View Deployment
+            </a>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+            <a href="#services" className="secondary-btn">
+              View Services
+            </a>
+          </div>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
+
+        <div className="server-box">
+          <div className="server-header">
+            <span>EC2 INSTANCE</span>
+            <span className="online">● Online</span>
+          </div>
+
+          <div className="server-content">
+            <div className="server-icon">☁</div>
+
+            <h2>{status}</h2>
+            <p>Amazon Web Services</p>
+
+            <div className="server-details">
+              <div>
+                <span>Environment</span>
+                <strong>Production</strong>
+              </div>
+
+              <div>
+                <span>Server</span>
+                <strong>EC2</strong>
+              </div>
+
+              <div>
+                <span>Port</span>
+                <strong>80</strong>
+              </div>
+            </div>
+
+            <button className="restart-btn" onClick={restartServer}>
+              Restart Server
+            </button>
+          </div>
         </div>
       </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      {/* Services */}
+      <section className="services" id="services">
+        <div className="section-title">
+          <p>TECHNOLOGIES USED</p>
+          <h2>My DevOps Stack</h2>
+        </div>
+
+        <div className="cards">
+          <div className="card">
+            <div className="card-icon react-icon">⚛</div>
+            <h3>React</h3>
+            <p>
+              Frontend application created using React and Vite.
+            </p>
+            <span className="tag">Frontend</span>
+          </div>
+
+          <div className="card">
+            <div className="card-icon docker-icon">🐳</div>
+            <h3>Docker</h3>
+            <p>
+              Application is packaged and deployed inside a Docker container.
+            </p>
+            <span className="tag">Container</span>
+          </div>
+
+          <div className="card">
+            <div className="card-icon aws-icon">☁</div>
+            <h3>AWS EC2</h3>
+            <p>
+              The Docker container runs on an Amazon EC2 cloud server.
+            </p>
+            <span className="tag">Cloud</span>
+          </div>
+
+          <div className="card">
+            <div className="card-icon nginx-icon">🌐</div>
+            <h3>Nginx</h3>
+            <p>
+              Nginx serves the production React files to the browser.
+            </p>
+            <span className="tag">Web Server</span>
+          </div>
+        </div>
+      </section>
+
+      {/* Deployment */}
+      <section className="deployment" id="deployment">
+        <div className="section-title">
+          <p>DEPLOYMENT PROCESS</p>
+          <h2>How My App Reaches the Internet</h2>
+        </div>
+
+        <div className="pipeline">
+
+          <div className="pipeline-step">
+            <div className="step-number">1</div>
+            <h3>Write Code</h3>
+            <p>Create the React application.</p>
+          </div>
+
+          <div className="arrow">→</div>
+
+          <div className="pipeline-step">
+            <div className="step-number">2</div>
+            <h3>Build Docker Image</h3>
+            <p>Create an image using Dockerfile.</p>
+          </div>
+
+          <div className="arrow">→</div>
+
+          <div className="pipeline-step">
+            <div className="step-number">3</div>
+            <h3>Deploy to EC2</h3>
+            <p>Run the Docker container on AWS.</p>
+          </div>
+
+          <div className="arrow">→</div>
+
+          <div className="pipeline-step">
+            <div className="step-number">4</div>
+            <h3>Open Website</h3>
+            <p>Access the app using the EC2 IP.</p>
+          </div>
+
+        </div>
+      </section>
+
+      {/* Status */}
+      <section className="status-section">
+        <div className="status-card">
+          <div>
+            <p className="status-label">CURRENT STATUS</p>
+            <h2>
+              <span className="status-dot"></span>
+              Application is {status}
+            </h2>
+          </div>
+
+          <div className="status-info">
+            <div>
+              <span>Docker</span>
+              <strong>Running</strong>
+            </div>
+
+            <div>
+              <span>Nginx</span>
+              <strong>Running</strong>
+            </div>
+
+            <div>
+              <span>EC2</span>
+              <strong>Online</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About */}
+      <section className="about" id="about">
+        <div className="about-content">
+          <p>ABOUT THIS PROJECT</p>
+
+          <h2>Learning DevOps Step by Step 🚀</h2>
+
+          <p>
+            This project helps me understand how a frontend application can
+            be built, containerized using Docker and deployed on an AWS EC2
+            instance.
+          </p>
+
+          <div className="learning-list">
+            <div>✓ React Development</div>
+            <div>✓ Docker Containers</div>
+            <div>✓ Nginx Web Server</div>
+            <div>✓ AWS EC2 Deployment</div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer>
+        <p>My First DevOps Project © 2026</p>
+      </footer>
+    </div>
+  );
 }
 
-export default App
+export default App;
